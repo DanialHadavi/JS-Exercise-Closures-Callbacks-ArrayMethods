@@ -164,8 +164,15 @@ function processContains(item, list, callback) {
  * [2] Invoking `processDuplicateFree` passing `[1,1,2,2,3]` and `(arr) => arr.length`,
  * should return 3.
 */
-function processDuplicateFree(/* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS */) {
+function processDuplicateFree(list , callback) {
   /* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS */
+  var unique = list.filter(function(item, pos) {
+     
+    return list.indexOf(item) == pos;
+  });
+ 
+  
+  return callback(unique);
 }
 
 /////////////// HIGHER-ORDER ARRAY METHODS ///////////////
@@ -229,8 +236,12 @@ function firstNamesAllCaps(runners) {
  * @returns an array containing only the runners that use the given `tShirtSize`.
  * The runners in the array appear in the same order they appear in the `runners` array.
 */
-function getRunnersByTShirtSize(/* CODE HERE */) {
+function getRunnersByTShirtSize(runners, tShirtSize) {
   /* CODE HERE */
+let new_array = runners.filter(function(item){
+return item.shirt_size == tShirtSize;
+})
+return new_array;
 }
 
 /**
@@ -243,8 +254,13 @@ function getRunnersByTShirtSize(/* CODE HERE */) {
  * @param runners array of runners like the one inside the /data/runners.js file.
  * @returns a number which is the sum of the donations by all runners.
 */
-function tallyUpDonations(/* CODE HERE */) {
+function tallyUpDonations(runners) {
   /* CODE HERE */
+  const sumAll =
+  runners.reduce(function(accumulator, item){
+    return accumulator + item.donation;
+  }, 0);
+  return sumAll;
 }
 
 /////////////// CLOSURES ///////////////
@@ -265,10 +281,12 @@ function tallyUpDonations(/* CODE HERE */) {
 */
 function counterMaker() {
   // BROKEN CODE STARTS
-  const count = 0;
-  function counter() {
-    ++count
+  let count = 0;
+  return function counter() {
+    
+    return count++ ;
   }
+   
   // BROKEN CODE ENDS
 }
 
@@ -292,8 +310,14 @@ function counterMaker() {
  * counter() // should return 0
  * etc
 */
-function counterMakerWithLimit(/* CODE HERE */) {
+function counterMakerWithLimit(maxValue) {
   /* CODE HERE */
+  let count = 0;
+  function counter() {
+    count > maxValue ? (count = 0) : count;
+    return count++;
+  }
+  return counter;
 }
 
 /////////////// END OF CHALLENGE ///////////////
